@@ -17,6 +17,11 @@ Install all dependencies
 yarn install
 ```
 
+In case using with Wordpress follow instructions which can be found by comments:
+```
+// Wordpress TODO:
+```
+
 ## Usage
 
 `yarn start` - dev server

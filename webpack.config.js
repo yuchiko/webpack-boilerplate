@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
+// Wordpress TODO: comment this line
 const webpack = require('webpack');
 
 const autoprefixer = require('autoprefixer');
@@ -186,6 +187,7 @@ module.exports = {
     path: dist,
   },
   plugins: [
+    // Wordpress TODO: comment this line
     new webpack.ProvidePlugin({
       $: 'jQuery',
       jQuery: 'jQuery',

@@ -1,3 +1,13 @@
+
+mixin image-size-comment(w, h)
+  | <!-- Attention: responsive image used. Require srcset -->
+  | <!-- #{`image sizes: default - ${w}x${h}, retina @2x - ${w*2}x${h*2}`} -->
+
+mixin image(src, srcset, w, h)
+  if (w && h)
+    +image-size-comment(w, h)
+  img(src= src srcset= `${srcset || src} 2x` draggable="false" alt="Image Required Attribute")
+  
 mixin counter-item(props)
   -var {title, count, description} = props
   .counter-item(class=className data-animation="counter-item")
