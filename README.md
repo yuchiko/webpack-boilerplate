@@ -1,5 +1,21 @@
 ## Prerequisites
-Required `node`, `npm`, `yarn`
+
+- yarn
+- node 12.18.4
+- nvm or fnm
+
+## Install
+
+Install and use proper node version from `.nvmrc` file
+
+```bash
+nvm install && nvm use
+```
+
+Install all dependencies
+```bash
+yarn install
+```
 
 ## Usage
 
