@@ -1,23 +1,20 @@
 const fs = require('fs');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const webpack = require('webpack');
 
 const autoprefixer = require('autoprefixer');
-const postcssSorting = require('postcss-sorting');
 const cssmqPacker = require('css-mqpacker');
 const sortMediaQueries = require('sort-css-media-queries');
 
-const context = path.resolve(__dirname, 'src');
+const context = path.resolve  (__dirname, 'src');
 const dist = path.resolve(__dirname, 'dist');
 
 const scssUtilsPath = 'styles/utils';
-const extractTextPlugin = new ExtractTextPlugin({
-  filename: getPath => getPath('css/[name].css').replace('css/js', '.'),
-});
 
 const templateEntriesDir = path.resolve(context, 'templates/pages');
 
@@ -53,7 +50,8 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: extractTextPlugin.extract([
+        use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -65,16 +63,17 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: [
-                autoprefixer({
-                  grid: true,
-                }),
-                postcssSorting,
-                cssmqPacker({
-                  sort: sortMediaQueries,
-                }),
-              ],
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: [
+                  autoprefixer({
+                    grid: true,
+                  }),
+                  cssmqPacker({
+                    sort: sortMediaQueries,
+                  }),
+                ],
+              },
               sourceMap: true,
             },
           },
@@ -82,9 +81,11 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              outputStyle: 'compact',
               sourceMap: true,
-              sourceComments: true,
+              sassOptions: {
+                outputStyle: 'compact',
+                sourceComments: true,
+              },
             },
           },
           {
@@ -97,7 +98,7 @@ module.exports = {
               ],
             },
           },
-        ]),
+        ],
       },
       {
         test: /\.(ttf|woff|woff2|eot|svg)$/,
@@ -112,7 +113,8 @@ module.exports = {
       {
         test: /^(?!.*\.generated\.ttf$).*\.ttf$/,
         exclude: path.resolve(context, 'icomoon'),
-        use: extractTextPlugin.extract([
+        use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -122,7 +124,7 @@ module.exports = {
           {
             loader: 'fontface-loader',
           },
-        ]),
+        ],
       },
       {
         test: /\.generated.(ttf|eot|woff|woff2)$/,
@@ -189,7 +191,10 @@ module.exports = {
       jQuery: 'jQuery',
       'window.jQuery': 'jQuery',
     }),
-    extractTextPlugin,
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
     ...pugFiles.map(file =>
       new HtmlWebpackPlugin({
         filename: `${file}.html`,
