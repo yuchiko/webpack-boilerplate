@@ -79,7 +79,7 @@ ol {
 }
 
 b {
-	font-weight: $font-weight_bold;
+	font-weight: $fw_bold;
 }
 
 p {
@@ -87,7 +87,7 @@ p {
 }
 
 blockquote {
-	font-weight: $font-weight_semibold;
+	font-weight: $fw_semibold;
 
 	margin: $indent-l 0;
 	padding-left: $indent-xl;
