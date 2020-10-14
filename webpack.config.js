@@ -4,6 +4,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Wordpress TODO: comment this line
 const webpack = require('webpack');
@@ -52,7 +53,12 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -145,14 +151,6 @@ module.exports = {
               name: '[path][name].[ext]',
             },
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                quality: 85,
-              },
-            },
-          },
         ],
       },
       {
@@ -196,6 +194,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './public/', to: 'public' },
+      ],
     }),
     ...pugFiles.map(file =>
       new HtmlWebpackPlugin({
