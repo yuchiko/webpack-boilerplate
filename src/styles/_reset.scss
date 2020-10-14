@@ -1,5 +1,36 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
 body {
-	@include webkit-smoothscroll;
+  text-rendering: optimizeSpeed;
+  @include webkit-smoothscroll;
 
   @include icon-styles {
     @include font-size(20);
@@ -18,47 +49,47 @@ body {
     display: inline-block;
   }
 
-	@include line-styles {
-		display: block;
-	}
+  @include line-styles {
+    display: block;
+  }
 }
 
 html {
-	&.has-modal {
-		&,
-		& body {
-			overflow: hidden;
-		}
-	}
+  scroll-behavior: smooth;
+
+  &.has-modal {
+    &,
+    & body {
+      overflow: hidden;
+    }
+  }
 }
 
 a {
   color: $c-current;
   text-decoration: none;
-	&:hover {
-		text-decoration: none;
-	}
+  &:hover {
+    text-decoration: none;
+  }
 
-	&:focus {
-		text-decoration: none;
+  &:focus {
+    text-decoration: none;
 
-		outline: none;
-	}
+    outline: none;
+  }
 }
 
 li:focus {
-	outline: none;
+  outline: none;
 }
 
 img {
-	display: inline-block;
+  border: none;
+  outline: none;
 
-	border: none;
-	outline: none;
-
-	&:focus {
-		outline: none;
-	}
+  &:focus {
+    outline: none;
+  }
 
   // For edge lazy-load images
   &[data-src],
@@ -66,41 +97,52 @@ img {
     display: block;
     min-height: 1px;
   }
+
+  /* Blur images when they have no alt attribute */
+  &:not([alt]) {
+    filter: blur(10px);
+  }
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
 }
 
 ul {
-	margin-bottom: 0;
+  margin-bottom: 0;
 
-	list-style: none;
+  list-style: none;
 }
 
 ol {
-	list-style-position: inside;
+  list-style-position: inside;
 }
 
 b {
-	font-weight: $fw_bold;
+  font-weight: $fw_bold;
 }
 
 p {
-	margin: 0;
+  margin: 0;
 }
 
 blockquote {
-	font-weight: $fw_semibold;
+  font-weight: $fw_semibold;
 
-	margin: $indent-l 0;
-	padding-left: $indent-xl;
+  margin: $indent-l 0;
+  padding-left: $indent-xl;
 
-	border-left: 1px solid $c-void;
+  border-left: 1px solid $c-void;
 }
 
 address {
-	font-style: normal;
+  font-style: normal;
 }
 
 figure {
-	margin: 0;
+  margin: 0;
 }
 
 // forms
@@ -108,69 +150,80 @@ input,
 textarea,
 button,
 select {
-	border: none;
-	background: transparent;
-	box-shadow: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
 }
 
 button {
-	cursor: pointer;
+  cursor: pointer;
   color: $c-current;
 }
 
 textarea {
-	resize: none;
-	vertical-align: top;
+  resize: none;
+  vertical-align: top;
 }
 
 label {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 fieldset {
-	border: none;
+  border: none;
 }
 
 input,
 textarea,
 button {
-	&:focus {
-		outline: none;
-	}
+  &:focus {
+    outline: none;
+  }
 }
 
 select {
-	appearance: none;
+  appearance: none;
 
-	&::-ms-expand {
-		display: none;
-	}
+  &::-ms-expand {
+    display: none;
+  }
 
-	&:focus {
-		outline: none;
-	}
+  &:focus {
+    outline: none;
+  }
 }
 
 // end forms
 
 .grid-container {
-	width: 100%;
+  width: 100%;
 }
 
 .layers {
-	@include layers;
+  @include layers;
 }
 
 .scrollbar-measure {
-	position: absolute;
-	top: -9999px;
+  position: absolute;
+  top: -9999px;
 
-	overflow: scroll;
+  overflow: scroll;
 
-	width: 100px;
-	height: 100px;
+  width: 100px;
+  height: 100px;
 }
 
 .visually-hidden {
   @include visually-hidden;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,17 +1,30 @@
 {
   "name": "mdvs_webpack_boilerpate",
   "version": "1.2.0",
-  "description": "Simple Webpack Boilerplate",
   "private": true,
+  "description": "Simple Webpack Boilerplate",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
     "build": "rm -rf dist && webpack --mode production && git add dist",
     "lint-fix": "stylelint 'src/**/*.scss' --fix && eslint src --fix",
+    "postcommit": "git update-index --again",
     "precommit": "lint-staged",
-    "postcommit": "git update-index --again"
+    "start": "webpack-dev-server --mode development"
   },
-  "engines": {
-    "node": ">=12.18.4"
+  "lint-staged": {
+    "ignore": [
+      "**/dist/**/*",
+      "**/icomoon/**/*"
+    ],
+    "linters": {
+      "*.scss": [
+        "stylelint --fix",
+        "git add"
+      ],
+      "*.js": [
+        "eslint --fix",
+        "git add"
+      ]
+    }
   },
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.6",
@@ -38,6 +51,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.3.0",
     "css-mqpacker": "^7.0.0",
     "eslint": "^7.9.0",
@@ -50,7 +64,6 @@
     "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.4.1",
     "husky": "^4.3.0",
-    "image-webpack-loader": "^7.0.1",
     "imports-loader": "^1.1.0",
     "lint-staged": "^10.4.0",
     "mini-css-extract-plugin": "^0.11.2",
@@ -74,20 +87,7 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-glsl-loader": "^1.0.1"
   },
-  "lint-staged": {
-    "linters": {
-      "*.scss": [
-        "stylelint --fix",
-        "git add"
-      ],
-      "*.js": [
-        "eslint --fix",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "**/dist/**/*",
-      "**/icomoon/**/*"
-    ]
+  "engines": {
+    "node": ">=12.18.4"
   }
 }
