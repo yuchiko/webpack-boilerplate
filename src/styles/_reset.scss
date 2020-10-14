@@ -1,6 +1,35 @@
-body {
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
   padding: 0;
+  list-style: none;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
+}
+
+body {
+  text-rendering: optimizeSpeed;
   @include webkit-smoothscroll;
 
   @include icon-styles {
@@ -26,6 +55,8 @@ body {
 }
 
 html {
+  scroll-behavior: smooth;
+
   &.has-modal {
     &,
     & body {
@@ -53,8 +84,6 @@ li:focus {
 }
 
 img {
-  display: inline-block;
-
   border: none;
   outline: none;
 
@@ -68,6 +97,17 @@ img {
     display: block;
     min-height: 1px;
   }
+
+  /* Blur images when they have no alt attribute */
+  &:not([alt]) {
+    filter: blur(10px);
+  }
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
 }
 
 ul {
@@ -113,6 +153,7 @@ select {
   border: none;
   background: transparent;
   box-shadow: none;
+  font: inherit;
 }
 
 button {
@@ -175,4 +216,14 @@ select {
 
 .visually-hidden {
   @include visually-hidden;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
