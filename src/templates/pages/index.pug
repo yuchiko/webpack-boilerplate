@@ -7,12 +7,13 @@ block content
   .grid-container 
     .grid-x.grid-margin-x
       .cell.medium-4
-        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: `${unsplash}/426x244/?dog`})
       .cell.medium-4
-        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: `${unsplash}/426x244/?cat`})
       .cell.medium-4
-        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
-    .div.mb-4.mt-4 
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: `${unsplash}/426x244/?frog`})
+    .div.p-b-4.p-t-4 Testing Atomic styles for indents <br>
+      code .p-b-4.p-t-4
     .grid-x
       .cell
         | Testing image by URL

@@ -227,3 +227,10 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+code {
+  background-color: #eee;
+  border-radius: 3px;
+  font-family: courier, monospace;
+  padding: 0 3px;
+}

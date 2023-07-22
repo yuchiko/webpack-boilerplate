@@ -1,5 +1,141 @@
-// colors
+/*  Atomic Styles
+    - - - - - - - - -
+    Table of Contents
+    - - - - - - - - -
+    001.Display and Positions
+    002.Paddings and Margins
+    003.Decoration
+    004.Flex
+    005.Colors
+    006.Typography
+    007.Keyframes
+    - - - - - - - - -
+ */
 
-.clr-secondary {
-  color: $c-secondary;
+// 001.Display and Positions
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.pos-r {
+  position: relative;
+}
+
+.pos-s {
+  position: static;
+}
+
+.pos-a {
+  position: absolute;
+}
+
+.pos-f {
+    position: fixed;
+}
+
+// 002.Paddings and Margins
+
+@each $direction in $directions {
+  @for $i from 0 through $indent_max {
+    .p-#{str-slice($direction,0,1)}-#{$i} {
+      padding-#{$direction}: $indent_step * $i !important;
+    }
+    .m-#{str-slice($direction,0,1)}-#{$i} {
+      margin-#{$direction}: $indent_step * $i !important;
+    }
+  }
+}
+
+// 003.Decoration
+
+// TODO: check this style
+// .border-bottom {
+//     border-bottom: 1px solid $c-border;
+// }
+
+.ta {
+  &-center {
+    text-align: center !important;
+  }
+
+  &-left {
+    text-align: left !important;
+  }
+
+  &-right {
+    text-align: right !important;
+  }
+}
+
+.tt-u {
+  text-transform: uppercase !important;
+}
+
+.fw {
+  &-normal {
+    font-weight: $fw_regular !important;
+  }
+
+  &-bold {
+    font-weight: $fw_bold !important;
+  }
+}
+
+.as-link {
+  text-decoration: underline !important;
+  color: $c-secondary !important;
+  cursor: pointer !important;
+  @include transition(color);
+
+  &:hover {
+    color: darken($c-secondary, 10%) !important;
+  }
+}
+
+// 004.Flex
+
+.align-center,
+.ai-center {
+  align-items: center !important;
+}
+
+.justify-center,
+.jc-center {
+  justify-content: center !important;
+}
+
+.justify-space-between,
+.jc-sb {
+  justify-content: space-between !important;
+}
+
+.fd-column {
+  flex-direction: column !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+// 005.Colors
+
+.c {
+  &-secondary {
+    color: $c-secondary !important;
+  }
+}
+
+// 006.Typography
+
+.lh-0 {
+  line-height: 0 !important;
 }
