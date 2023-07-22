@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - yarn
-- node 12.18.4
+- node 14.21
 - nvm or fnm
 
 ## Install
