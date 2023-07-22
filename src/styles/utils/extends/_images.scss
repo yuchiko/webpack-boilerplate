@@ -1,3 +1,5 @@
+@use "sass:math";
+
 %image_cover {
   position: relative;
   display: block;
@@ -18,7 +20,7 @@
 %image_responsive{
   @include if-smaller-than(l) {
     height: auto;
-    padding-top: percentage(9/16);
+    padding-top: percentage(math.div(9, 16));
   }
 }
 

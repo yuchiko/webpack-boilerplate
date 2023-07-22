@@ -2,19 +2,19 @@
 [data-animation="section"] {
   &#{$animated} {
     [data-animation="title"] {
-      @extend [data-animation="title"]#{$loaded};
+      @extend [data-animation=title], .is-loaded;
     }
     [data-animation="subtitle"] {
-      @extend [data-animation="subtitle"]#{$loaded};
+      @extend [data-animation="subtitle"], .is-loaded;
     }
     [data-animation="text"] {
-      @extend [data-animation="text"]#{$loaded};
+      @extend [data-animation="text"], .is-loaded;
     }
     [data-animation="fade-in-up"] {
-      @extend [data-animation="fade-in-up"]#{$loaded};
+      @extend [data-animation="fade-in-up"], .is-loaded;
     }
     [data-animation="fade-in"] {
-      @extend [data-animation="fade-in"]#{$loaded};
+      @extend [data-animation="fade-in"], .is-loaded;
     }
   }
   [data-animation="title"] {
@@ -24,7 +24,7 @@
         opacity: 1;
         @for $i from 1 through 20 {
           &:nth-child(#{$i}) {
-            transition-delay: #{$i/10}s;
+            transition-delay: #{$i*0.1}s;
           }
         }
       }
@@ -42,7 +42,7 @@
         opacity: 1;
         @for $i from 1 through 30 {
           &:nth-child(#{$i}) {
-            transition-delay: #{0.15 + $i/10}s;
+            transition-delay: #{0.15 + $i*0.1}s;
           }
         }
       }
@@ -79,7 +79,7 @@
       transform: none;
       @for $i from 1 through 20 {
         &:nth-child(#{$i}) {
-          transition-delay: #{0.1 + $i/10}s;
+          transition-delay: #{0.1 + $i*0.1}s;
         }
       }
     }
@@ -92,7 +92,7 @@
       opacity: 1;
       @for $i from 1 through 20 {
         &:nth-child(#{$i}) {
-          transition-delay: #{0.1 + $i/10}s;
+          transition-delay: #{0.1 + $i*0.1}s;
         }
       }
     }

@@ -90,7 +90,6 @@ module.exports = {
             options: {
               sourceMap: true,
               sassOptions: {
-                outputStyle: 'compact',
                 sourceComments: true,
               },
             },
