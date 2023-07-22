@@ -1,7 +1,14 @@
 extends ../layout
+include ../mixins
 
 block vars
   -page_title = 'Welcome'
 block content
-  .test-url-bg
-    h1 Hello
+  .grid-container 
+    .grid-x.grid-margin-x
+      .cell.medium-4
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
+      .cell.medium-4
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
+      .cell.medium-4
+        +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins'})
