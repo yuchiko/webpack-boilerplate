@@ -171,7 +171,7 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-loader',
+        loader: 'simple-pug-loader',
         options: {
           pretty: true,
           root: path.resolve(__dirname),
