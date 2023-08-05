@@ -1,0 +1,17 @@
+// Styles for Header
+
+.header {
+    background: #A6D9F7;
+    color: #312F2F;
+    padding: 1rem 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+
+    nav {
+        margin-left: auto;
+        a:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+}

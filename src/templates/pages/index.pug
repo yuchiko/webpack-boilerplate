@@ -23,7 +23,8 @@ block content
       .cell
         h2 Testing svg in image src
         img.btn__icon(src=require('@/images/icons/ukraine.svg').default, alt="Ukraine icon")
-        h2 Testing svg inline
+        h2 Testing svg inline by pug mixin
+        +svg-icon(svg-icon-name='facebook')
     hr
     .grid-x
       .cell
