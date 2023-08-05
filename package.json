@@ -14,7 +14,7 @@
     "precommit": "lint-staged",
     "start": "webpack-dev-server --mode development",
     "dev": "webpack-dev-server --mode development",
-    "predeploy": "rm -rf dist && webpack --mode production && git add dist",
+    "predeploy": "rm -rf dist && webpack --mode production && git add -f dist",
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
