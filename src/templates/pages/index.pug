@@ -5,6 +5,8 @@ block vars
   -page_title = 'Welcome'
 block content
   .grid-container 
+    hr
+    h2 Testing grid
     .grid-x.grid-margin-x
       .cell.medium-4
         +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: require('@/images/test_only/mini_hulk.jpeg').default})
@@ -12,9 +14,18 @@ block content
         +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: `${unsplash}/700x700/?cat`})
       .cell.medium-4
         +card_news({title: 'Foundation Grid', text: 'Testing Grid and Pug mixins', img: `${unsplash}/700x700/?frog`})
-    .div.p-b-4.p-t-4 Testing Atomic styles for indents <br>
+    hr
+    h2 Testing Atomic styles for indents
+    p.p-b-4.p-t-4
       code .p-b-4.p-t-4
+    hr
     .grid-x
       .cell
-        | Testing image by URL
+        h2 Testing svg in image src
+        img.btn__icon(src=require('@/images/icons/ukraine.svg').default, alt="Ukraine icon")
+        h2 Testing svg inline
+    hr
+    .grid-x
+      .cell
+        h2 Testing image by URL in css
         .webpack-public-image-test

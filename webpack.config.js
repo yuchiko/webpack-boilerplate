@@ -1,56 +1,60 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 // TODO: update lib
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // Wordpress TODO: comment this line
-const webpack = require('webpack');
+const webpack = require("webpack");
 
-const cssmqPacker = require('css-mqpacker');
-const sortMediaQueries = require('sort-css-media-queries');
+const context = path.resolve(__dirname, "src");
+const dist = path.resolve(__dirname, "dist");
 
-const context = path.resolve  (__dirname, 'src');
-const dist = path.resolve(__dirname, 'dist');
+const scssUtilsPath = "styles/utils";
 
-const scssUtilsPath = 'styles/utils';
+const templateEntriesDir = path.resolve(context, "templates/pages");
 
-const templateEntriesDir = path.resolve(context, 'templates/pages');
-
-const pugFiles = fs.readdirSync(templateEntriesDir).map(file => file.split('.pug')[0]);
+const pugFiles = fs
+  .readdirSync(templateEntriesDir)
+  .map((file) => file.split(".pug")[0]);
 
 module.exports = {
   context,
   cache: {
-    type: 'memory',
+    type: "memory",
   },
   devServer: {
-    contentBase: dist,
-    stats: {
-      assets: false,
-      children: false,
-      chunks: false,
-      hash: false,
-      modules: false,
-      publicPath: false,
-      timings: false,
-      version: false,
-      warnings: true,
+    static: {
+      directory: dist,
+      // watch: true,
+    },
+    devMiddleware: {
+      stats: {
+        assets: false,
+        children: false,
+        chunks: false,
+        hash: false,
+        modules: false,
+        publicPath: false,
+        timings: false,
+        version: false,
+        warnings: true,
+      },
     },
   },
-  devtool: 'source-map', // 'cheap-module-eval-source-map', - for faster builds
+  devtool: "source-map", // 'cheap-module-eval-source-map', - for faster builds
   entry: {
-    'js/main': './scripts/main.js',
+    "js/main": "./scripts/main.js",
   },
   module: {
     rules: [
       {
         test: /\.js?$/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
       {
@@ -59,11 +63,11 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../'
-            }
+              publicPath: "../",
+            },
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               // https://github.com/webpack-contrib/css-loader/issues/228#issuecomment-204607491
               importLoaders: 3,
@@ -71,22 +75,20 @@ module.exports = {
             },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
-                ident: 'postcss',
+                ident: "postcss",
                 plugins: [
-                  cssmqPacker({
-                    sort: sortMediaQueries,
-                  }),
+                  //
                 ],
               },
               sourceMap: true,
             },
           },
-          'resolve-url-loader',
+          "resolve-url-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sourceMap: true,
               sassOptions: {
@@ -95,7 +97,7 @@ module.exports = {
             },
           },
           {
-            loader: 'sass-resources-loader',
+            loader: "sass-resources-loader",
             options: {
               resources: [
                 path.join(context, `${scssUtilsPath}/_vars.scss`),
@@ -108,70 +110,75 @@ module.exports = {
       },
       {
         test: /\.(ttf|woff|woff2|eot|svg)$/,
-        include: path.resolve(context, 'icomoon'),
-        loader: 'file-loader',
+        include: path.resolve(context, "icomoon"),
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]',
-          outputPath: './fonts/icomoon',
+          name: "[name].[ext]",
+          outputPath: "./fonts/icomoon",
           useRelativePath: false,
         },
       },
       {
         test: /^(?!.*\.generated\.ttf$).*\.ttf$/,
-        exclude: path.resolve(context, 'icomoon'),
+        exclude: path.resolve(context, "icomoon"),
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
             },
           },
           {
-            loader: 'fontface-loader',
+            loader: "fontface-loader",
           },
         ],
       },
       {
         test: /\.generated.(ttf|eot|woff|woff2)$/,
-        exclude: path.resolve(context, 'icomoon'),
-        loader: 'file-loader',
+        exclude: path.resolve(context, "icomoon"),
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
-          outputPath: './',
+          name: "[path][name].[ext]",
+          outputPath: "./",
         },
       },
       {
         test: /.*\.(gif|png|jpe?g)$/i,
+        dependency: { not: ['url'] },
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[path][name].[ext]',
+              name: "[path][name].[ext]",
             },
           },
         ],
+        type: 'javascript/auto'
       },
       {
         test: /\.(svg|mp4)$/,
-        exclude: [path.resolve(context, 'images/inline'), path.resolve(context, 'icomoon')],
-        loader: 'file-loader',
+        exclude: [
+          path.resolve(context, "images/inline"),
+          path.resolve(context, "icomoon"),
+        ],
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
+          name: "[path][name].[ext]",
         },
       },
       {
         test: /\.svg$/,
-        include: path.resolve(context, 'images/inline'),
-        loader: 'svg-inline-loader',
+        include: path.resolve(context, "images/inline"),
+        loader: "svg-inline-loader",
         options: {
           removeTags: true,
-          removingTags: ['title', 'desc', 'style'],
+          removingTags: ["title", "desc", "style"],
         },
       },
       {
         test: /\.pug$/,
-        loader: 'simple-pug-loader',
+        loader: "simple-pug-loader",
         options: {
           pretty: true,
           root: path.resolve(__dirname),
@@ -180,30 +187,30 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[name].js',
+    filename: "[name].js",
     path: dist,
   },
   plugins: [
     // Wordpress TODO: comment this line
     new webpack.ProvidePlugin({
-      $: 'jQuery',
-      jQuery: 'jQuery',
-      'window.jQuery': 'jQuery',
+      $: "jQuery",
+      jQuery: "jQuery",
+      "window.jQuery": "jQuery",
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: './public/', to: 'public' },
-      ],
+      patterns: [{ from: "./public/", to: "public" }],
     }),
-    ...pugFiles.map(file =>
-      new HtmlWebpackPlugin({
-        filename: `${file}.html`,
-        template: `${templateEntriesDir}/${file}.pug`,
-      })),
+    ...pugFiles.map(
+      (file) =>
+        new HtmlWebpackPlugin({
+          filename: `${file}.html`,
+          template: `${templateEntriesDir}/${file}.pug`,
+        })
+    ),
     // new FaviconsWebpackPlugin({
     //   logo: './images/favicon.png',
     //   prefix: 'favicon/',
@@ -223,12 +230,11 @@ module.exports = {
     //     windows: true,
     //   },
     // }),
-
   ],
   resolve: {
-    extensions: ['.js'],
+    extensions: [".js"],
     alias: {
-      '@': path.join(__dirname, 'src'),
+      "@": path.join(__dirname, "src"),
     },
   },
   optimization: {
@@ -236,13 +242,13 @@ module.exports = {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: './js/vendor',
-          chunks: 'all',
+          name: "./js/vendor",
+          chunks: "all",
         },
       },
     },
     runtimeChunk: {
-      name: './js/manifest',
+      name: "./js/manifest",
     },
   },
 };
