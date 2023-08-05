@@ -3,13 +3,13 @@ const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// TODO: update lib
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Wordpress TODO: comment this line
 const webpack = require('webpack');
 
-const autoprefixer = require('autoprefixer');
 const cssmqPacker = require('css-mqpacker');
 const sortMediaQueries = require('sort-css-media-queries');
 
@@ -24,6 +24,9 @@ const pugFiles = fs.readdirSync(templateEntriesDir).map(file => file.split('.pug
 
 module.exports = {
   context,
+  cache: {
+    type: 'memory',
+  },
   devServer: {
     contentBase: dist,
     stats: {
@@ -73,9 +76,6 @@ module.exports = {
               postcssOptions: {
                 ident: 'postcss',
                 plugins: [
-                  autoprefixer({
-                    grid: true,
-                  }),
                   cssmqPacker({
                     sort: sortMediaQueries,
                   }),
@@ -204,25 +204,25 @@ module.exports = {
         filename: `${file}.html`,
         template: `${templateEntriesDir}/${file}.pug`,
       })),
-    new FaviconsWebpackPlugin({
-      logo: './images/favicon.png',
-      prefix: 'favicon/',
-      persistentCache: true,
-      inject: true,
-      background: '#fff',
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: true,
-      },
-    }),
+    // new FaviconsWebpackPlugin({
+    //   logo: './images/favicon.png',
+    //   prefix: 'favicon/',
+    //   persistentCache: true,
+    //   inject: true,
+    //   background: '#fff',
+    //   icons: {
+    //     android: true,
+    //     appleIcon: true,
+    //     appleStartup: true,
+    //     coast: false,
+    //     favicons: true,
+    //     firefox: true,
+    //     opengraph: false,
+    //     twitter: false,
+    //     yandex: false,
+    //     windows: true,
+    //   },
+    // }),
 
   ],
   resolve: {
