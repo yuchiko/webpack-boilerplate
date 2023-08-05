@@ -16,9 +16,10 @@
 @include foundation-flex-classes;
 
 @import "atomic";
-@import "base";
 
+@import "base";
 @import "base-components/base";
+
 @import "animations";
 
 // TODO: remove this lines :: only for testing
