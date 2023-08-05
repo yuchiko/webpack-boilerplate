@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[772],{821:()=>{var e=document.documentElement;/Edge/.test(navigator.userAgent)&&e.classList.add("is-edge"),/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)&&e.classList.add("is-mobile"),document.addEventListener("DOMContentLoaded",(function(){console.log("Your functions here :)")}))}},e=>{e(e.s=821)}]);
+//# sourceMappingURL=main.js.map
