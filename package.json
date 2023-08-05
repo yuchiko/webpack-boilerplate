@@ -1,15 +1,21 @@
 {
   "name": "mdvs_webpack_boilerpate",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Simple Webpack Boilerplate",
+  "description": "Simple Webpack Boilerplate with Pug templates",
+  "homepage": "git@github.com:yuchiko/webpack-boilerplate.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yuchiko/webpack-boilerplate.git"
+  },
   "scripts": {
-    "build": "rm -rf dist && webpack --mode production && git add dist",
     "lint-fix": "stylelint 'src/**/*.scss' --fix && eslint src --fix",
     "postcommit": "git update-index --again",
     "precommit": "lint-staged",
     "start": "webpack-dev-server --mode development",
-    "dev": "webpack-dev-server --mode development"
+    "dev": "webpack-dev-server --mode development",
+    "predeploy": "rm -rf dist && webpack --mode production && git add dist",
+    "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
     "ignore": [
@@ -56,6 +62,7 @@
     "eslint-plugin-import": "^2.28.0",
     "file-loader": "^6.2.0",
     "fontface-loader": "^0.0.8",
+    "gh-pages": "^5.0.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
