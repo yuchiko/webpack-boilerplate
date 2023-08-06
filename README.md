@@ -1,6 +1,7 @@
 # Webpack Boilerplate
 
 [Grid rules](https://get.foundation/sites/docs/xy-grid.html)
+[Boilerplate GH page](https://yuchiko.github.io/webpack-boilerplate/)
 
 ## Prerequisites
 
