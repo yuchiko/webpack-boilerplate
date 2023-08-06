@@ -27,6 +27,8 @@ module.exports = {
     type: "memory",
   },
   devServer: {
+    hot: false,
+    liveReload: true,
     static: {
       directory: dist,
       // watch: true,
