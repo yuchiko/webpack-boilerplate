@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "description": "Simple Webpack Boilerplate with Pug templates",
-  "homepage": "git@github.com:yuchiko/webpack-boilerplate.git",
+  "homepage": "https://yuchiko.github.io/webpack-boilerplate/",
   "repository": {
     "type": "git",
     "url": "git@github.com:yuchiko/webpack-boilerplate.git"
